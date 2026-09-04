@@ -42,7 +42,7 @@ jobs:
             python3-devel \
             python3-pip \
             libzfs7-devel \
-            zfslib7
+            libzfs7
 
       - name: Read version from manifest
         id: manifest
