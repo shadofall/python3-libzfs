@@ -1,0 +1,59 @@
+python3-libzfs (2.4.1-4jammy) jammy; urgency=medium
+
+  * Push new release to stable
+
+ -- Jordan Keough <jkeough@45drives.com>  Tue, 04 Aug 2026 09:33:48 -0300
+
+python3-libzfs (2.4.1-3jammy) jammy; urgency=medium
+
+  * Testing package for zfsutils dep name change
+
+ -- Jordan Keough <jkeough@45drives.com>  Tue, 04 Aug 2026 08:37:45 -0300
+
+python3-libzfs (2.4.1-2jammy) jammy; urgency=medium
+
+  * testing package  build processto support zfs2.4
+
+ -- Rachit Hans <rhans@45drives.com>  Tue, 07 Jul 2026 08:53:07 -0300
+
+python3-libzfs (2.4.1-1jammy) jammy; urgency=medium
+
+  * building package to support zfs2.4
+
+ -- Rachit Hans <rhans@45drives.com>  Tue, 07 Jul 2026 07:13:46 -0300
+
+python3-libzfs (2.4.0-4jammy) jammy; urgency=medium
+
+  * building package to support zfs2.4
+
+ -- Rachit Hans <rhans@45drives.com>  Mon, 06 Jul 2026 14:51:15 -0300
+
+python3-libzfs (2.4.0-3jammy) jammy; urgency=medium
+
+  * building package to support zfs2.4
+
+ -- Rachit Hans <rhans@45drives.com>  Mon, 06 Jul 2026 14:33:49 -0300
+
+python3-libzfs (2.4.0-2jammy) jammy; urgency=medium
+
+  * ZFS 2.4 compatibility for Debian Trixie (PVE 9.2
+
+ -- Rachit Hans <rhans@45drives.com>  Mon, 06 Jul 2026 11:02:48 -0300
+
+python3-libzfs (2.4.0-1jammy) jammy; urgency=medium
+
+  * building test package for trixie
+
+ -- Rachit Hans <rhans@45drives.com>  Mon, 06 Jul 2026 07:18:51 -0300
+
+python3-libzfs (2.2.1-6jammy) jammy; urgency=medium
+
+  * build for new repos
+
+ -- Jordan Keough <jkeough@45drives.com>  Thu, 20 Feb 2025 12:40:09 -0400
+
+python3-libzfs (2.2.1-1jammy) focal; urgency=medium
+
+  * update build deps
+
+ -- Brett Kelly <bkelly@45drives.com>  Mon, 3 Feb 2025 08:39:46 -0400

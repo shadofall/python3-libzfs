@@ -1,0 +1,47 @@
+python3-libzfs (2.4.1-4bookworm) bookworm; urgency=medium
+
+  * Push new release to stable
+
+ -- Jordan Keough <jkeough@45drives.com>  Tue, 04 Aug 2026 09:33:48 -0300
+
+python3-libzfs (2.4.1-3bookworm) bookworm; urgency=medium
+
+  * Testing package for zfsutils dep name change
+
+ -- Jordan Keough <jkeough@45drives.com>  Tue, 04 Aug 2026 08:37:45 -0300
+
+python3-libzfs (2.4.1-2bookworm) bookworm; urgency=medium
+
+  * testing package  build processto support zfs2.4
+
+ -- Rachit Hans <rhans@45drives.com>  Tue, 07 Jul 2026 08:53:07 -0300
+
+python3-libzfs (2.4.1-1bookworm) bookworm; urgency=medium
+
+  * building package to support zfs2.4
+
+ -- Rachit Hans <rhans@45drives.com>  Tue, 07 Jul 2026 07:13:46 -0300
+
+python3-libzfs (2.4.0-4bookworm) bookworm; urgency=medium
+
+  * building package to support zfs2.4
+
+ -- Rachit Hans <rhans@45drives.com>  Mon, 06 Jul 2026 14:51:15 -0300
+
+python3-libzfs (2.4.0-2.4.0bookworm) bookworm; urgency=medium
+
+  * ZFS 2.4 compatibility for Debian Trixie (PVE 9.2
+
+ -- Rachit Hans <rhans@45drives.com>  Mon, 06 Jul 2026 11:01:13 -0300
+
+python3-libzfs (2.4.0-1bookworm) bookworm; urgency=medium
+
+  * building test package for trixie
+
+ -- Rachit Hans <rhans@45drives.com>  Mon, 06 Jul 2026 07:18:51 -0300
+
+python3-libzfs (2.3.0-1bookworm) bookworm; urgency=medium
+
+  * Cython 3 / ZFS 2.2 + 2.3 compatibility
+
+ -- Rachit Hans <rhans@45drives.com>  Thu, 03 Jul 2026 10:00:00 -0300

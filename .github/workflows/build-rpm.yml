@@ -1,0 +1,98 @@
+name: Build RPM (EL9)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: rockylinux:9
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Add ZFS repository
+        run: |
+          dnf install -y dnf-plugins-core
+          # Add the OpenZFS EL9 repository
+          cat > /etc/yum.repos.d/openzfs.repo << 'EOF'
+          [openzfs]
+          name=OpenZFS for EL9
+          baseurl=http://download.zfsonlinux.org/latest/epel/9Server/x86_64/
+          enabled=1
+          gpgcheck=0
+          EOF
+
+      - name: Install build dependencies
+        run: |
+          dnf install -y \
+            rpm-build \
+            rpmdevtools \
+            gcc \
+            make \
+            autoconf \
+            automake \
+            python3 \
+            python3-devel \
+            python3-pip \
+            libzfs7-devel \
+            zfslib7
+
+      - name: Read version from manifest
+        id: manifest
+        run: |
+          VERSION=$(python3 -c "import json; m=json.load(open('manifest.json')); print(m['version'])")
+          BUILD=$(python3 -c "import json; m=json.load(open('manifest.json')); print(m['build_number'])")
+          NAME=$(python3 -c "import json; m=json.load(open('manifest.json')); print(m['name'])")
+          echo "version=$VERSION"   >> "$GITHUB_OUTPUT"
+          echo "build=$BUILD"       >> "$GITHUB_OUTPUT"
+          echo "name=$NAME"         >> "$GITHUB_OUTPUT"
+
+      - name: Render spec file from Jinja2 template
+        run: |
+          pip3 install jinja2
+          python3 - <<'PYEOF'
+          import json, jinja2, pathlib
+
+          manifest = json.loads(pathlib.Path("manifest.json").read_text())
+          template_src = pathlib.Path("packaging/rocky-el9/main.spec.j2").read_text()
+          spec = jinja2.Template(template_src).render(**manifest)
+          pathlib.Path("python3-libzfs.spec").write_text(spec)
+          print(spec)
+          PYEOF
+
+      - name: Set up rpmbuild tree
+        run: |
+          rpmdev-setuptree
+          NAME=${{ steps.manifest.outputs.name }}
+          VERSION=${{ steps.manifest.outputs.version }}
+          # Create the source tarball
+          mkdir -p /tmp/${NAME}-${VERSION}
+          cp -r . /tmp/${NAME}-${VERSION}/
+          rm -rf /tmp/${NAME}-${VERSION}/.git
+          tar -czf ~/rpmbuild/SOURCES/${NAME}-${VERSION}.tar.gz \
+            -C /tmp ${NAME}-${VERSION}
+          cp python3-libzfs.spec ~/rpmbuild/SPECS/
+
+      - name: Build RPM
+        run: |
+          rpmbuild -ba ~/rpmbuild/SPECS/python3-libzfs.spec
+
+      - name: Collect built RPMs
+        run: |
+          mkdir -p /tmp/rpms
+          find ~/rpmbuild/RPMS ~/rpmbuild/SRPMS -name '*.rpm' -exec cp {} /tmp/rpms/ \;
+          ls -lh /tmp/rpms/
+
+      - name: Upload RPM artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: python3-libzfs-${{ steps.manifest.outputs.version }}-${{ steps.manifest.outputs.build }}.el9
+          path: /tmp/rpms/*.rpm
+          if-no-files-found: error
