@@ -28,7 +28,7 @@
         ],
         "rocky_common": [
             "zfs >= 2.2",
-            "zfs < 2.3"
+            "zfs < 2.5"
         ]
     },
     "builds": [
