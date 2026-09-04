@@ -27,10 +27,8 @@
             "zfsutils-linux (<< 2.5)"
         ],
         "rocky_common": [
-            "zfslib7"
-        ],
-        "rocky_build": [
-            "libzfs7-devel"
+            "zfs >= 2.2",
+            "zfs < 2.3"
         ]
     },
     "builds": [
