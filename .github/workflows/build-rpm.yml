@@ -10,6 +10,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     container:
       image: rockylinux:9
 
@@ -96,3 +98,13 @@ jobs:
           name: python3-libzfs-${{ steps.manifest.outputs.version }}-${{ steps.manifest.outputs.build }}.el9
           path: /tmp/rpms/*.rpm
           if-no-files-found: error
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: rpm-el9-v${{ steps.manifest.outputs.version }}-${{ steps.manifest.outputs.build }}
+          name: python3-libzfs EL9 ${{ steps.manifest.outputs.version }}-${{ steps.manifest.outputs.build }}
+          body: EL9 RPM build artifacts for python3-libzfs.
+          files: /tmp/rpms/*.rpm
+          generate_release_notes: true
+          make_latest: false
